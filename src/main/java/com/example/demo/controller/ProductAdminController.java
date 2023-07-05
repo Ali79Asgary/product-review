@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/product_admins")
+@RequestMapping("/product_admins")
 @RequiredArgsConstructor
 public class ProductAdminController {
 
@@ -19,7 +19,7 @@ public class ProductAdminController {
     @GetMapping
     public ResponseEntity<List<ProductAdmin>> getAllProductAdmins() {
         List<ProductAdmin> productAdmins = productAdminService.getAllProductAdmins();
-        if (productAdmins.isEmpty()) {
+        if (productAdmins == null || productAdmins.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(productAdmins);

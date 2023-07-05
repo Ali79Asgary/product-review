@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/votes")
+@RequestMapping("/votes")
 @RequiredArgsConstructor
 public class VoteController {
 
@@ -19,7 +19,7 @@ public class VoteController {
     @GetMapping
     public ResponseEntity<List<Vote>> getAllVotes() {
         List<Vote> votes = voteService.getAllVotes();
-        if (votes.isEmpty()) {
+        if (votes == null || votes.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(votes);
