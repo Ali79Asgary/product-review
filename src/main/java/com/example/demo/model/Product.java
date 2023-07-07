@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product {
 
     @Id
@@ -17,6 +21,20 @@ public class Product {
     private Long id;
 
     private String name;
+
+    private Integer price;
+
+    @Builder.Default
+    private Boolean isPublic = true;
+
+    @Builder.Default
+    private Boolean isCommentingActive = true;
+
+    @Builder.Default
+    private Boolean isVotingActive = true;
+
+    @Builder.Default
+    private Boolean isCommentsAndVotesPublic = true;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();

@@ -1,12 +1,17 @@
 package com.example.demo.model;
 
+import com.example.demo.enumeration.VoteStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Vote {
 
     @Id
@@ -14,6 +19,9 @@ public class Vote {
     private Long id;
 
     private Integer score;
+
+    @Enumerated(EnumType.STRING)
+    private VoteStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
