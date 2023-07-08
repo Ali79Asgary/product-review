@@ -25,7 +25,7 @@ public class Product {
     private Integer price;
 
     @Builder.Default
-    private Boolean isPublic = true;
+    private Boolean isShowPublic = true;
 
     @Builder.Default
     private Boolean isCommentingActive = true;
