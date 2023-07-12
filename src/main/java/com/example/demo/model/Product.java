@@ -37,8 +37,8 @@ public class Product {
     private Boolean isCommentsAndVotesPublic = true;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Vote> votes = new ArrayList<>();
+    private List<Vote> votes;
 }

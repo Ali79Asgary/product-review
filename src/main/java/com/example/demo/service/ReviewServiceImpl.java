@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Comment;
 import com.example.demo.model.Product;
+import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,10 @@ import java.util.List;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ProductRepository productRepository;
+
+    private final CommentRepository commentRepository;
+
+    private final VoteRepository voteRepository;
 
     @Override
     public List<Product> getAllProductsByIsShowPublic(Boolean isShowPublic) {
@@ -51,5 +58,20 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Boolean getIsCommentsAndVotesByProductId(Long id) {
         return productRepository.findIsCommentsAndVotesPublicByProductId(id);
+    }
+
+    @Override
+    public Integer getCountOfComments() {
+        return Math.toIntExact(commentRepository.count());
+    }
+
+    @Override
+    public Double getAverageOfScores() {
+        return voteRepository.calculateAverageScores();
+    }
+
+    @Override
+    public List<Comment> getLast3CommentsByProductId(Long id) {
+        return commentRepository.findTop3ByProductIdOrderByCreatedAtDesc(id);
     }
 }

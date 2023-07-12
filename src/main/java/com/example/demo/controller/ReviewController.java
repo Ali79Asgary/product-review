@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.Comment;
 import com.example.demo.model.Product;
 import com.example.demo.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -94,5 +95,23 @@ public class ReviewController {
         } else {
             return ResponseEntity.ok(isCommentsAndVotesPublic);
         }
+    }
+
+    @GetMapping("/comments_count")
+    public ResponseEntity<Integer> getCommentsCount() {
+        Integer commentsCount = reviewService.getCountOfComments();
+        return ResponseEntity.ok(commentsCount);
+    }
+
+    @GetMapping("/scores_average")
+    public ResponseEntity<Double> getAverageOfScores() {
+        Double averageOfScores = reviewService.getAverageOfScores();
+        return ResponseEntity.ok(averageOfScores);
+    }
+
+    @GetMapping("/last_3_comments/{id}")
+    public ResponseEntity<List<Comment>> getLast3CommentsByProductId(@PathVariable Long id) {
+        List<Comment> last3Comments = reviewService.getLast3CommentsByProductId(id);
+        return ResponseEntity.ok(last3Comments);
     }
 }

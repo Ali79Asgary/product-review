@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Comment;
 import com.example.demo.model.Product;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public interface ReviewService {
     Boolean getIsVotingActiveByProductId(Long id);
 
     Boolean getIsCommentsAndVotesByProductId(Long id);
+
+    Integer getCountOfComments();
+
+    Double getAverageOfScores();
+
+    List<Comment> getLast3CommentsByProductId(Long id);
 }
