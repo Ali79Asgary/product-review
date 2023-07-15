@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.enumeration.CommentStatus;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Product;
 
@@ -27,5 +28,13 @@ public interface ReviewService {
 
     Double getAverageOfScores();
 
-    List<Comment> getLast3CommentsByProductId(Long id);
+    List<Comment> getLast3CommentsByProductIdAndStatus(Long id);
+
+    void confirmComment(Long commentId);
+
+    void rejectComment(Long commentId);
+
+    void confirmVote(Long voteId);
+
+    void rejectVote(Long voteId);
 }

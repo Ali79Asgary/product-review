@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
-    @Query("SELECT AVG(v.score) FROM Vote v")
+    @Query("SELECT AVG(v.score) FROM Vote v where v.status='CONFIRMED'")
     Double calculateAverageScores();
 }

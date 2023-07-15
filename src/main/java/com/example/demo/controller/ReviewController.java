@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.enumeration.CommentStatus;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Product;
@@ -111,7 +112,31 @@ public class ReviewController {
 
     @GetMapping("/last_3_comments/{id}")
     public ResponseEntity<List<Comment>> getLast3CommentsByProductId(@PathVariable Long id) {
-        List<Comment> last3Comments = reviewService.getLast3CommentsByProductId(id);
+        List<Comment> last3Comments = reviewService.getLast3CommentsByProductIdAndStatus(id);
         return ResponseEntity.ok(last3Comments);
+    }
+
+    @PutMapping("/comment/{commentId}/confirm")
+    public ResponseEntity<String> confirmComment(@PathVariable Long commentId){
+        reviewService.confirmComment(commentId);
+        return ResponseEntity.ok("Comment confirmed successfully");
+    }
+
+    @PutMapping("/comment/{commentId}/reject")
+    public ResponseEntity<String> rejectComment(@PathVariable Long commentId){
+        reviewService.rejectComment(commentId);
+        return ResponseEntity.ok("Comment rejected successfully");
+    }
+
+    @PutMapping("/vote/{voteId}/confirm")
+    public ResponseEntity<String> confirmVote(@PathVariable Long voteId){
+        reviewService.confirmVote(voteId);
+        return ResponseEntity.ok("Vote confirmed successfully");
+    }
+
+    @PutMapping("/vote/{voteId}/reject")
+    public ResponseEntity<String> rejectVote(@PathVariable Long voteId){
+        reviewService.rejectVote(voteId);
+        return ResponseEntity.ok("Vote rejected successfully");
     }
 }
